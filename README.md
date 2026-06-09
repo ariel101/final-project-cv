@@ -338,10 +338,20 @@ Universidad Mayor Real y Pontificia de San Francisco Xavier de Chuquisaca — In
 
 ---
 
-## Licencia
+## 📄 Licencia y Créditos
 
-Proyecto desarrollado con fines académicos e investigativos. Puede modificarse y reutilizarse citando a los autores originales.
+Este proyecto fue desarrollado con fines académicos, educativos y de investigación.
+
+El código fuente puede ser modificado, reutilizado y adaptado citando a los autores originales del proyecto.
+
+### 📦 Dataset Utilizado
+
+El modelo de detección de Equipos de Protección Personal (EPP) fue entrenado utilizando como base el dataset **Construction PPE Dataset** publicado en Roboflow Universe.
+
+**Dataset:**
+https://universe.roboflow.com/gaos-workspace/construction-ppe-qofi4
+
+Agradecemos a los autores y colaboradores del conjunto de datos por facilitar recursos que contribuyen al desarrollo de soluciones de visión artificial aplicadas a la seguridad laboral.
 
 ---
 
-> Si este proyecto te resultó útil, considera dejar una estrella ⭐ en el repositorio.
