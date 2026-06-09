@@ -1,7 +1,7 @@
-# 🦺 Sistema Inteligente de Control de Acceso mediante Detección de EPP con YOLOv8 y Raspberry Pi
+# 🦺 Sistema Inteligente de Control de Acceso mediante Detección de EPP con YOLOv26 y Raspberry Pi
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
-![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-green)
+![YOLO26](https://shields.io)
 ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-4-red)
 ![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-orange)
 
@@ -260,9 +260,9 @@ Proyecto-EPP/
 ## 1. Clonar repositorio
 
 ```bash
-git clone https://github.com/USUARIO/REPOSITORIO.git
+git clone https://github.com/ariel101/final-project-cv.git
 
-cd REPOSITORIO
+cd final_project-cv
 ```
 
 ---
@@ -337,7 +337,7 @@ python src/main.py
 El sistema iniciará:
 
 * Cámara
-* Modelo YOLOv8
+* Modelo YOLOv26
 * Detección en tiempo real
 * Validación de EPP
 * Control de acceso
