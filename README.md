@@ -46,8 +46,8 @@ El proyecto utiliza una Raspberry Pi 4 Model B junto con una cámara de video y 
 
 | Acceso Permitido | Acceso Denegado |
 |:---:|:---:|
-| ![Acceso OK](images/acceso_ok1.jpeg) | ![Acceso Denegado](images/falta_chaleco.jpeg) |
-| ![Pantalla OK](images/acceso_ok_pantalla.jpeg) | ![Sin Chaleco](images/falta_chaleco2.jpeg) |
+| ![Acceso OK](images/acceso_ok1.jpeg) | ![Acceso Denegado](images/falta_chaleco2.jpeg) |
+| ![Pantalla OK](images/acceso_ok_pantalla.jpeg) | ![Sin Chaleco](images/falta_chaleco.jpeg) |
 
 ---
 
@@ -55,7 +55,7 @@ El proyecto utiliza una Raspberry Pi 4 Model B junto con una cámara de video y 
 
 1. El trabajador se posiciona frente a la cámara.
 2. Se captura un fotograma en tiempo real.
-3. YOLOv8 detecta los EPP presentes en la imagen.
+3. YOLOv26 detecta los EPP presentes en la imagen.
 4. El sistema verifica los elementos obligatorios (casco y chaleco).
 5. Según el resultado:
 
