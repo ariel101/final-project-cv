@@ -215,26 +215,36 @@ main.py
 # 📁 Estructura del Proyecto
 
 ```text
-Proyecto-EPP/
+FINAL-PROJECT-CV/
 │
-├── models/
-│   └── best.pt
-│
-├── src/
-│   ├── camera.py
-│   ├── detector.py
-│   ├── validator.py
-│   ├── hardware_controller.py
-│   └── main.py
-│
-├── dataset/
-│
-├── docs/
+├── hardware/
+│   ├── __init__.py
+│   ├── gpio.py
+│   └── lcd.py
 │
 ├── images/
+│   ├── sistema_general.png
+│   ├── tiempo_real.jpeg
+│   ├── tiempo_real2.jpeg
+│   ├── acceso_ok1.jpeg
+│   ├── acceso_ok_pantalla.jpeg
+│   ├── falta_chaleco.jpeg
+│   └── falta_chaleco2.jpeg
 │
-├── requirements.txt
+├── logs/
 │
+├── tests/
+│   ├── __init__.py
+│   ├── test_buzzer.py
+│   ├── test_gpio.py
+│   ├── test_integracion.py
+│   ├── test_lcd.py
+│   ├── test_led.py
+│   └── test_servo.py
+│
+├── .gitignore
+├── config.py
+├── main.py
 └── README.md
 ```
 
@@ -244,7 +254,7 @@ Proyecto-EPP/
 
 | Biblioteca  | Función                          |
 | ----------- | -------------------------------- |
-| Ultralytics | Implementación de YOLOv8         |
+| Ultralytics | Implementación de YOLOv26         |
 | OpenCV      | Procesamiento de imágenes        |
 | NumPy       | Operaciones matemáticas          |
 | RPi.GPIO    | Control GPIO                     |
@@ -297,19 +307,31 @@ pip install -r requirements.txt
 
 # ⚙️ Configuración
 
-## Modelo Entrenado
+## 🤖 Modelo Entrenado
 
-Copiar el modelo entrenado dentro de:
+El sistema utiliza un modelo YOLOv8 previamente entrenado para la detección de Equipos de Protección Personal (EPP).
 
-```text
-models/
-```
+Debido a su tamaño, el modelo no se encuentra incluido dentro de este repositorio. Antes de ejecutar el sistema, debe configurarse la ruta del modelo en el archivo `config.py`.
 
 Ejemplo:
 
-```text
-models/best.pt
+```python
+MODEL_DIR = "/home/raspberrypiii/best26_ariel_ncnn_model/"
 ```
+
+Verifique que la ruta apunte correctamente al directorio donde se encuentra almacenado el modelo entrenado.
+
+### Estructura esperada
+
+```text
+/home/raspberrypiii/
+└── best26_ariel_ncnn_model/
+    ├── model.ncnn.bin
+    ├── model.ncnn.param
+    └── metadata.yaml
+```
+
+> **Importante:** Si el modelo se encuentra en otra ubicación, actualice la variable `MODEL_DIR` dentro de `config.py` antes de iniciar el sistema.
 
 ---
 
@@ -318,8 +340,8 @@ models/best.pt
 Modificar los pines según la conexión física utilizada:
 
 ```python
-LED_VERDE = 17
-LED_ROJO = 27
+LED_VERDE = 27
+LED_ROJO = 17
 BUZZER = 22
 SERVO = 18
 ```
@@ -349,9 +371,9 @@ El sistema iniciará:
 ## Carga del Modelo
 
 ```python
-from ultralytics import YOLO
-
-model = YOLO("models/best.pt")
+print("Cargando modelo YOLO...")
+model = YOLO(config.MODELO_DIR, task="detect")
+print("Modelo listo")
 ```
 
 Este fragmento carga el modelo entrenado responsable de la detección de los Equipos de Protección Personal.
@@ -453,13 +475,13 @@ Muestra al usuario los elementos de seguridad faltantes.
 
 # 👨‍💻 Autores
 
-**Nombre del Estudiante 1**
+**Vidaurre Mejia Christian Paul**
 
-**Nombre del Estudiante 2**
+**Cayo Vargas Ariel Nelzon**
 
-**Universidad / Carrera**
+**UMRPSFXCH / Ing Ciencias de la Computacion**
 
-**Gestión 2026**
+**Gestión 01-2026**
 
 ---
 
