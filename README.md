@@ -1,447 +1,172 @@
-# 🦺 Sistema Inteligente de Control de Acceso mediante Detección de EPP con YOLOv26 y Raspberry Pi
+# Sistema Inteligente de Control de Acceso mediante Detección de EPP
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
-![YOLOv26](https://img.shields.io/badge/YOLOv26-Ultralytics-green)
+![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-green)
 ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-4-red)
 ![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-orange)
 
-## 📖 Descripción
+## Descripción
 
 Sistema embebido de visión artificial para el control automatizado de acceso mediante la verificación en tiempo real del uso correcto de Equipos de Protección Personal (EPP).
 
-El proyecto utiliza una Raspberry Pi 4 Model B, una cámara de captura de video y un modelo de detección de objetos YOLOv26 entrenado para identificar elementos de seguridad como cascos y chalecos reflectantes.
-
-Cuando un trabajador se presenta frente a la cámara, el sistema analiza la imagen y determina si cumple con los requisitos de seguridad establecidos. Si porta todos los elementos obligatorios, se autoriza el acceso; en caso contrario, se genera una alerta visual y sonora indicando los elementos faltantes.
+El proyecto utiliza una Raspberry Pi 4 Model B junto con una cámara de video y un modelo YOLOv8 entrenado para identificar cascos y chalecos reflectantes. Cuando un trabajador se posiciona frente a la cámara, el sistema analiza la imagen y determina si cumple con los requisitos de seguridad establecidos: si porta todos los elementos obligatorios, se autoriza el acceso; de lo contrario, se genera una alerta visual y sonora indicando los elementos faltantes.
 
 ---
 
-# 🎯 Objetivos
+## Objetivos
 
-## Objetivo General
+**General:** Desarrollar un sistema inteligente capaz de verificar automáticamente el uso adecuado de Equipos de Protección Personal mediante técnicas de visión artificial e inteligencia artificial.
 
-Desarrollar un sistema inteligente capaz de verificar automáticamente el uso adecuado de Equipos de Protección Personal mediante técnicas de visión artificial e inteligencia artificial.
-
-## Objetivos Específicos
-
-* Detectar EPP en tiempo real utilizando YOLOv26.
-* Automatizar el control de acceso a zonas restringidas.
-* Reducir errores asociados a la supervisión manual.
-* Proporcionar retroalimentación inmediata al usuario.
-* Implementar una solución de bajo costo basada en hardware embebido.
+**Específicos:**
+- Detectar EPP en tiempo real utilizando YOLOv8.
+- Automatizar el control de acceso a zonas restringidas.
+- Reducir errores asociados a la supervisión manual.
+- Proporcionar retroalimentación inmediata al usuario.
+- Implementar una solución de bajo costo basada en hardware embebido.
 
 ---
 
-# 🖼️ Capturas del Proyecto
+## Capturas del Proyecto
 
-## Sistema Completo
+### Sistema Completo
 
 ![Sistema Completo](images/sistema_completo.jpeg)
+![Sistema General](images/sistema_general.png)
 
-![Sistema Completo](images/sistema_general.png)
+### Detección de EPP en Tiempo Real
 
-```markdown
+![Ejecución YOLO](images/corriendo_yolo.jpeg)
+![Detección 1](images/tiempo_real.jpeg)
+![Detección 2](images/tiempo_real2.jpeg)
 
-```
+### Acceso Permitido / Acceso Denegado
 
----
-
-## Detección de EPP en Tiempo Real
-
-![yolo ejecucion](images/corriendo_yolo.jpeg)
-![Detección](images/tiempo_real.jpeg)
-![Detección](images/tiempo_real2.jpeg)
-
-```markdown
-
-```
+| Acceso Permitido | Acceso Denegado |
+|:---:|:---:|
+| ![Acceso OK](images/acceso_ok1.jpeg) | ![Acceso Denegado](images/falta_chaleco.jpeg) |
+| ![Pantalla OK](images/acceso_ok_pantalla.jpeg) | ![Sin Chaleco](images/falta_chaleco2.jpeg) |
 
 ---
 
-## Acceso Permitido
-
-![Acceso Permitido](images/acceso_ok1.jpeg)
-![acceso Permitido](images/acceso_ok_pantalla.jpeg)
-
-```markdown
-
-```
-
----
-
-## Acceso Denegado
-
-![Acceso Denegado](images/falta_chaleco.jpeg)
-![Acceso Denegado](images/falta_chaleco2.jpeg)
-
-```markdown
-
-```
-
----
-
-# ⚙️ Funcionamiento General
+## Funcionamiento General
 
 1. El trabajador se posiciona frente a la cámara.
 2. Se captura un fotograma en tiempo real.
-3. YOLOv8 detecta los EPP presentes.
-4. El sistema verifica los elementos obligatorios.
-5. Si cumple los requisitos:
+3. YOLOv8 detecta los EPP presentes en la imagen.
+4. El sistema verifica los elementos obligatorios (casco y chaleco).
+5. Según el resultado:
 
-   * LED RGB verde.
-   * Apertura de puerta mediante servomotor.
-   * Incremento del contador de accesos.
-6. Si faltan elementos:
-
-   * LED RGB rojo.
-   * Activación del buzzer.
-   * Mensaje en LCD indicando los EPP faltantes.
-   * Acceso bloqueado.
+| Condición | Respuesta del sistema |
+|---|---|
+| EPP completo | LED verde · apertura de barrera · incremento de contador |
+| EPP incompleto | LED rojo · activación de buzzer · mensaje en LCD con elementos faltantes |
 
 ---
 
-# 🏗️ Arquitectura del Sistema
+## Arquitectura del Sistema
 
-## Arquitectura Física
+### Hardware
 
-```text
+```
                      ┌──────────────┐
                      │    Cámara    │
                      └──────┬───────┘
                             │
                             ▼
                  ┌─────────────────────┐
-                 │ Raspberry Pi 4      │
-                 │ YOLOv26 + OpenCV     │
+                 │    Raspberry Pi 4   │
+                 │   YOLOv8 + OpenCV   │
                  └──────┬──────────────┘
                         │
         ┌───────────────┼────────────────┐
-        │               │                │
         ▼               ▼                ▼
-    LED RGB         LCD 16x2         Buzzer
+    LED RGB         LCD 16x2          Buzzer
         │
         ▼
-   Servomotor
-        │
-        ▼
- Apertura Puerta
+   Servomotor → Apertura de barrera
 ```
 
----
+### Software
 
-# 💻 Arquitectura del Software
+El sistema está organizado en módulos independientes para facilitar el mantenimiento y la escalabilidad.
 
-El sistema fue diseñado utilizando una arquitectura modular para facilitar el mantenimiento, escalabilidad y reutilización del código.
+#### Captura de video (`main.py`, `config.py`)
 
-## Módulos Principales
+Inicializa la cámara mediante Picamera2, captura fotogramas en tiempo real y los convierte al formato requerido por OpenCV.
 
-### 📷 Módulo de Captura
+```python
+picam2 = Picamera2()
+cam_config = picam2.create_preview_configuration(
+    main={"size": (config.CAM_ANCHO, config.CAM_ALTO)}
+)
+picam2.configure(cam_config)
+picam2.start()
 
-Responsabilidades:
-
-* Inicializar la cámara.
-* Capturar fotogramas.
-* Entregar imágenes al detector.
-
-Archivo:
-
-```text
-camera.py
+frame = picam2.capture_array()
+frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
 ```
 
----
+#### Detección de EPP (`main.py`, `config.py`)
 
-### 🤖 Módulo de Detección
+Carga el modelo YOLOv8 entrenado y ejecuta inferencias sobre cada fotograma. Las clases detectadas se agrupan para contemplar distintas etiquetas generadas durante el entrenamiento.
 
-Responsabilidades:
-
-* Cargar el modelo YOLOv8.
-* Realizar inferencias.
-* Obtener clases detectadas.
-
-Archivo:
-
-```text
-detector.py
+```python
+model = YOLO(config.MODELO_DIR, task="detect")
+results = model(frame, imgsz=config.IMGSZ, conf=config.CONFIANZA)
 ```
 
----
-
-### ✅ Módulo de Validación
-
-Responsabilidades:
-
-* Comparar elementos detectados.
-* Determinar EPP faltantes.
-* Autorizar o rechazar acceso.
-
-Archivo:
-
-```text
-validator.py
+```python
+CLASES_CASCO   = ["hardhat", "helmet"]
+CLASES_CHALECO = ["safety vest", "vest"]
 ```
 
----
+#### Validación y control de acceso (`main.py`, `hardware/`)
 
-### 🔌 Módulo de Hardware
+Determina si el trabajador porta todos los EPP requeridos y coordina las acciones de hardware. Para evitar cambios de estado causados por detecciones erróneas, se emplea un mecanismo de confirmación por fotogramas consecutivos.
 
-Responsabilidades:
+```python
+epp_completo = casco_detectado and chaleco_detectado
 
-* Control del LED RGB.
-* Activación del buzzer.
-* Manejo del servomotor.
-* Comunicación con LCD.
-* Gestión de los pines GPIO de la Raspberry Pi.
-* Interacción con los dispositivos físicos del sistema.
-
-Archivos:
-
-```text
-hardware/
-├── gpio.py
-└── lcd.py
+if frames_sin_epp >= config.FRAMES_CONFIRMACION:
+    estado_actual = "ALERTA"
+elif frames_con_epp >= config.FRAMES_CONFIRMACION:
+    estado_actual = "OK"
 ```
 
-#### Componentes Controlados
+#### Configuración (`config.py`)
+
+Centraliza todos los parámetros del sistema: resolución de cámara, modelo YOLO, clases de EPP válidas y pines GPIO. Modificar este archivo no requiere alterar la lógica principal.
+
+```python
+CAM_ANCHO = 416
+CAM_ALTO  = 320
+CONFIANZA = 0.4
+IMGSZ     = 416
+```
+
+#### Módulo de hardware (`hardware/gpio.py`, `hardware/lcd.py`)
+
+Gestiona el LED RGB, el buzzer, el servomotor y la pantalla LCD a través de los pines GPIO de la Raspberry Pi.
 
 | Dispositivo | Función |
-|------------|----------|
-| LED RGB | Indicar acceso permitido o denegado |
-| Buzzer | Emitir alertas sonoras |
+|---|---|
+| LED RGB | Indicar acceso permitido (verde) o denegado (rojo) |
+| Buzzer | Emitir alerta sonora |
 | Servomotor | Apertura y cierre de la barrera |
-| LCD 16x2 | Mostrar mensajes de estado y alertas |
-
-#### Pruebas Unitarias de Hardware
-
-El correcto funcionamiento de cada dispositivo fue validado mediante scripts de prueba independientes ubicados en la carpeta `tests/`.
-
-```text
-tests/
-├── test_buzzer.py
-├── test_led.py
-├── test_servo.py
-└── test_lcd.py
-```
-
-# 🧪 Pruebas de Hardware
-
-Para garantizar el correcto funcionamiento de cada componente físico del sistema, se desarrollaron pruebas individuales para cada dispositivo conectado a la Raspberry Pi.
-
-Las pruebas se encuentran en la carpeta:
-
-```text
-tests/
-├── test_buzzer.py
-├── test_led.py
-├── test_servo.py
-└── test_lcd.py
-```
+| LCD 16×2 | Mostrar mensajes de estado y EPP faltantes |
 
 ---
 
-## 🔊 Prueba de Buzzer
+## Estructura del Proyecto
 
-Verifica la activación del buzzer mediante distintos patrones de alerta sonora.
-
-### Funcionalidades evaluadas
-
-- Sonido continuo.
-- Pitidos cortos de alerta.
-- Pitido prolongado.
-- Liberación correcta de recursos GPIO.
-
-### Fragmento principal
-
-```python
-buzzer_on()
-time.sleep(2)
-buzzer_off()
-
-for i in range(3):
-    buzzer_on()
-    time.sleep(0.3)
-    buzzer_off()
-    time.sleep(0.3)
 ```
-
-### Archivo
-
-```text
-tests/test_buzzer.py
-```
-
----
-
-## 💡 Prueba de LED RGB
-
-Verifica los estados visuales del sistema para indicar acceso permitido o denegado.
-
-### Funcionalidades evaluadas
-
-- Encendido LED verde.
-- Encendido LED rojo.
-- Apagado del LED.
-- Secuencia de parpadeo de alarma.
-
-### Fragmento principal
-
-```python
-led_verde()
-time.sleep(3)
-
-led_rojo()
-time.sleep(3)
-
-led_apagado()
-```
-
-### Archivo
-
-```text
-tests/test_led.py
-```
-
----
-
-## 🚧 Prueba de Servomotor
-
-Permite validar el mecanismo de apertura y cierre de la barrera de acceso.
-
-### Funcionalidades evaluadas
-
-- Apertura de barrera.
-- Cierre de barrera.
-- Ciclos repetitivos de funcionamiento.
-
-### Fragmento principal
-
-```python
-barrera_abrir()
-time.sleep(2)
-
-barrera_cerrar()
-time.sleep(2)
-```
-
-### Archivo
-
-```text
-tests/test_servo.py
-```
-
----
-
-## 📟 Prueba de Pantalla LCD
-
-Verifica la visualización de mensajes de estado y alertas para el usuario.
-
-### Funcionalidades evaluadas
-
-- Mensaje de acceso autorizado.
-- Alerta por falta de casco.
-- Alerta por falta de chaleco.
-- Alerta por ausencia de múltiples EPP.
-- Apagado de pantalla.
-
-### Fragmento principal
-
-```python
-lcd_ok(lcd, 5)
-
-lcd_alerta(
-    lcd,
-    falta_casco=True,
-    falta_chaleco=False
-)
-```
-
-### Archivo
-
-```text
-tests/test_lcd.py
-```
-
----
-
-## ▶️ Ejecución de Pruebas
-
-Las pruebas pueden ejecutarse individualmente desde la Raspberry Pi.
-
-### Buzzer
-
-```bash
-python tests/test_buzzer.py
-```
-
-### LED RGB
-
-```bash
-python tests/test_led.py
-```
-
-### Servomotor
-
-```bash
-python tests/test_servo.py
-```
-
-### LCD
-
-```bash
-python tests/test_lcd.py
-```
-
----
-
-## ✅ Resultados Esperados
-
-Al ejecutar correctamente las pruebas:
-
-- El buzzer debe emitir los patrones de sonido programados.
-- El LED RGB debe alternar entre los estados verde, rojo y apagado.
-- El servomotor debe abrir y cerrar la barrera sin bloqueos.
-- La pantalla LCD debe mostrar correctamente los mensajes de acceso y alerta.
-
-Estas pruebas permiten validar cada componente de forma independiente antes de ejecutar el sistema completo de detección de EPP.
-
----
-
-### 🚀 Módulo Principal
-
-Responsabilidades:
-
-* Integración de todos los módulos.
-* Gestión del flujo principal.
-* Coordinación del sistema.
-
-Archivo:
-
-```text
-main.py
-```
-
----
-
-# 📁 Estructura del Proyecto
-
-```text
 FINAL-PROJECT-CV/
-│
 ├── hardware/
 │   ├── __init__.py
 │   ├── gpio.py
 │   └── lcd.py
-│
 ├── images/
-│   ├── sistema_general.png
-│   ├── tiempo_real.jpeg
-│   ├── tiempo_real2.jpeg
-│   ├── acceso_ok1.jpeg
-│   ├── acceso_ok_pantalla.jpeg
-│   ├── falta_chaleco.jpeg
-│   └── falta_chaleco2.jpeg
-│
 ├── logs/
-│
 ├── tests/
 │   ├── __init__.py
 │   ├── test_buzzer.py
@@ -450,8 +175,6 @@ FINAL-PROJECT-CV/
 │   ├── test_lcd.py
 │   ├── test_led.py
 │   └── test_servo.py
-│
-├── .gitignore
 ├── config.py
 ├── main.py
 └── README.md
@@ -459,54 +182,62 @@ FINAL-PROJECT-CV/
 
 ---
 
-# 📚 Bibliotecas Utilizadas
+## Pruebas de Hardware
 
-| Biblioteca  | Función                          |
-| ----------- | -------------------------------- |
-| Ultralytics | Implementación de YOLOv26         |
-| OpenCV      | Procesamiento de imágenes        |
-| NumPy       | Operaciones matemáticas          |
-| RPi.GPIO    | Control GPIO                     |
-| gpiozero    | Gestión simplificada de hardware |
-| smbus2      | Comunicación I2C                 |
-| Pillow      | Procesamiento de imágenes        |
-| Python      | Lenguaje principal               |
+Cada componente físico dispone de un script de prueba independiente ubicado en la carpeta `tests/`. Estas pruebas permiten validar el funcionamiento de cada dispositivo antes de ejecutar el sistema completo.
+
+| Componente | Script | Ejecución |
+|---|---|---|
+| Buzzer | `test_buzzer.py` | `python tests/test_buzzer.py` |
+| LED RGB | `test_led.py` | `python tests/test_led.py` |
+| Servomotor | `test_servo.py` | `python tests/test_servo.py` |
+| LCD 16×2 | `test_lcd.py` | `python tests/test_lcd.py` |
+
+**Resultados esperados:**
+- El buzzer emite los patrones de sonido programados (continuo, pitidos cortos y prolongado).
+- El LED RGB alterna entre verde, rojo y apagado.
+- El servomotor abre y cierra la barrera sin bloqueos.
+- La pantalla LCD muestra correctamente los mensajes de acceso y alerta.
 
 ---
 
-# 🔧 Instalación
+## Bibliotecas Utilizadas
 
-## 1. Clonar repositorio
+| Biblioteca | Función |
+|---|---|
+| Ultralytics | Implementación de YOLOv8 |
+| OpenCV | Procesamiento de imágenes |
+| NumPy | Operaciones matemáticas |
+| RPi.GPIO | Control de pines GPIO |
+| gpiozero | Gestión simplificada de hardware |
+| smbus2 | Comunicación I2C (LCD) |
+| Pillow | Procesamiento de imágenes auxiliar |
+| Picamera2 | Captura de video desde cámara Raspberry Pi |
+
+---
+
+## Instalación
+
+### 1. Clonar el repositorio
 
 ```bash
 git clone https://github.com/ariel101/final-project-cv.git
-
 cd final_project-cv
 ```
 
----
-
-## 2. Crear entorno virtual
-
-Linux:
+### 2. Crear entorno virtual
 
 ```bash
+# Linux
 python3 -m venv venv
-
 source venv/bin/activate
-```
 
-Windows:
-
-```bash
+# Windows
 python -m venv venv
-
 venv\Scripts\activate
 ```
 
----
-
-## 3. Instalar dependencias
+### 3. Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
@@ -514,198 +245,84 @@ pip install -r requirements.txt
 
 ---
 
-# ⚙️ Configuración
+## Configuración
 
-## 🤖 Modelo Entrenado
+### Modelo entrenado
 
-El sistema utiliza un modelo YOLOv26 previamente entrenado para la detección de Equipos de Protección Personal (EPP).
-
-Debido a su tamaño, el modelo no se encuentra incluido dentro de este repositorio. Antes de ejecutar el sistema, debe configurarse la ruta del modelo en el archivo `config.py`.
-
-Ejemplo:
+El modelo YOLOv8 no está incluido en el repositorio por su tamaño. Antes de ejecutar el sistema, configure su ruta en `config.py`:
 
 ```python
 MODEL_DIR = "/home/raspberrypiii/best26_ariel_ncnn_model/"
 ```
 
-Verifique que la ruta apunte correctamente al directorio donde se encuentra almacenado el modelo entrenado.
+La estructura esperada del directorio del modelo es:
 
-### Estructura esperada
-
-```text
-/home/raspberrypiii/
-└── best26_ariel_ncnn_model/
-    ├── model.ncnn.bin
-    ├── model.ncnn.param
-    └── metadata.yaml
+```
+best26_ariel_ncnn_model/
+├── model.ncnn.bin
+├── model.ncnn.param
+└── metadata.yaml
 ```
 
-> **Importante:** Si el modelo se encuentra en otra ubicación, actualice la variable `MODEL_DIR` dentro de `config.py` antes de iniciar el sistema.
+### Pines GPIO
 
----
-
-## Configuración GPIO
-
-Modificar los pines según la conexión física utilizada:
+Modifique los pines en `config.py` según la conexión física utilizada:
 
 ```python
 LED_VERDE = 27
-LED_ROJO = 17
-BUZZER = 22
-SERVO = 18
+LED_ROJO  = 17
+BUZZER    = 22
+SERVO     = 18
 ```
 
 ---
 
-# ▶️ Ejecución
-
-Ejecutar:
+## Ejecución
 
 ```bash
-python src/main.py
+python main.py
 ```
 
-El sistema iniciará:
-
-* Cámara
-* Modelo YOLOv26
-* Detección en tiempo real
-* Validación de EPP
-* Control de acceso
+Al iniciar, el sistema cargará la cámara, el modelo YOLOv8 y comenzará la detección en tiempo real con control de acceso activo.
 
 ---
 
-# 🧠 Fragmentos de Código Importantes
+## Componentes de Hardware
 
-## Carga del Modelo
-
-```python
-print("Cargando modelo YOLO...")
-model = YOLO(config.MODELO_DIR, task="detect")
-print("Modelo listo")
-```
-
-Este fragmento carga el modelo entrenado responsable de la detección de los Equipos de Protección Personal.
-
----
-
-## Inferencia en Tiempo Real
-
-```python
-results = model(frame, conf=0.5)
-
-for result in results:
-    for box in result.boxes:
-        clase = int(box.cls[0])
-        confianza = float(box.conf[0])
-```
-
-Permite analizar cada fotograma capturado y obtener las clases detectadas junto a su nivel de confianza.
+- Raspberry Pi 4 Model B
+- Cámara USB o Raspberry Pi Camera
+- Pantalla LCD 16×2 con interfaz I2C
+- Servomotor SG90
+- Buzzer activo
+- LED RGB de cátodo común
+- Fuente de alimentación 5V
+- Cables Dupont
 
 ---
 
-## Verificación de Elementos Obligatorios
+## Mejoras Futuras
 
-```python
-required_items = ["helmet", "vest"]
-
-missing = [
-    item for item in required_items
-    if item not in detected_items
-]
-```
-
-Compara los elementos detectados contra la lista de EPP obligatorios para determinar si el acceso puede ser autorizado.
+- Reconocimiento facial para identificación de trabajadores.
+- Registro de accesos en base de datos.
+- Panel web con estadísticas de uso.
+- Almacenamiento de evidencias fotográficas.
+- Notificaciones por Telegram o correo electrónico.
+- Integración con sistemas de control industrial.
 
 ---
 
-## Control de Acceso
+## Autores
 
-```python
-if len(missing) == 0:
-    open_door()
-    green_led()
-else:
-    red_led()
-    activate_buzzer()
-```
+**Vidaurre Mejia Christian Paul** · **Cayo Vargas Ariel Nelzon** · **Cepeda Alvaro Sebastian** · **Laime Marco**
 
-Implementa la lógica principal de autorización o rechazo de ingreso.
+Universidad Mayor Real y Pontificia de San Francisco Xavier de Chuquisaca — Ingeniería en Ciencias de la Computación · Gestión 01-2026
 
 ---
 
-## Actualización de LCD
+## Licencia
 
-```python
-message = "Falta: " + ", ".join(missing)
-
-lcd.clear()
-lcd.write_string(message)
-```
-
-Muestra al usuario los elementos de seguridad faltantes.
+Proyecto desarrollado con fines académicos e investigativos. Puede modificarse y reutilizarse citando a los autores originales.
 
 ---
 
-# 🔌 Componentes de Hardware
-
-* Raspberry Pi 4 Model B
-* Cámara USB / Raspberry Pi Camera
-* Pantalla LCD 16x2 I2C
-* Servomotor SG90
-* Buzzer
-* LED RGB
-* Fuente de alimentación 5V
-* Cables Dupont
-
----
-
-# 📈 Resultados Esperados
-
-* Detección automática de EPP.
-* Monitoreo en tiempo real.
-* Control automatizado de acceso.
-* Reducción de errores humanos.
-* Incremento del cumplimiento de normas de seguridad.
-
----
-
-# 🚀 Mejoras Futuras
-
-* Reconocimiento facial.
-* Registro de accesos en base de datos.
-* Dashboard web.
-* Estadísticas de uso.
-* Integración con sistemas industriales.
-* Almacenamiento de evidencias fotográficas.
-* Notificaciones mediante Telegram o correo electrónico.
-
----
-
-# 👨‍💻 Autores
-
-**Vidaurre Mejia Christian Paul**
-
-**Cayo Vargas Ariel Nelzon**
-
-**Cepeda Alvaro Sebastian**
-
-**Laime Marco**
-
-**UMRPSFXCH / Ing Ciencias de la Computacion**
-
-**Gestión 01-2026**
-
----
-
-# 📄 Licencia
-
-Este proyecto fue desarrollado con fines académicos y de investigación.
-
-Puede modificarse y reutilizarse citando a los autores originales.
-
----
-
-# ⭐ Apoya el Proyecto
-
-Si este proyecto te resultó útil, considera dejar una estrella ⭐ en el repositorio.
+> Si este proyecto te resultó útil, considera dejar una estrella ⭐ en el repositorio.
