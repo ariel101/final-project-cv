@@ -35,6 +35,8 @@ Desarrollar un sistema inteligente capaz de verificar automáticamente el uso ad
 
 ## Sistema Completo
 
+![Sistema Completo](images/sistema_completo.jpeg)
+
 ![Sistema Completo](images/sistema_general.png)
 
 ```markdown
@@ -45,6 +47,7 @@ Desarrollar un sistema inteligente capaz de verificar automáticamente el uso ad
 
 ## Detección de EPP en Tiempo Real
 
+![yolo ejecucion](images/corriendo_yolo.jpeg)
 ![Detección](images/tiempo_real.jpeg)
 ![Detección](images/tiempo_real2.jpeg)
 
@@ -187,12 +190,218 @@ Responsabilidades:
 * Activación del buzzer.
 * Manejo del servomotor.
 * Comunicación con LCD.
+* Gestión de los pines GPIO de la Raspberry Pi.
+* Interacción con los dispositivos físicos del sistema.
 
-Archivo:
+Archivos:
 
 ```text
-hardware_controller.py
+hardware/
+├── gpio.py
+└── lcd.py
 ```
+
+#### Componentes Controlados
+
+| Dispositivo | Función |
+|------------|----------|
+| LED RGB | Indicar acceso permitido o denegado |
+| Buzzer | Emitir alertas sonoras |
+| Servomotor | Apertura y cierre de la barrera |
+| LCD 16x2 | Mostrar mensajes de estado y alertas |
+
+#### Pruebas Unitarias de Hardware
+
+El correcto funcionamiento de cada dispositivo fue validado mediante scripts de prueba independientes ubicados en la carpeta `tests/`.
+
+```text
+tests/
+├── test_buzzer.py
+├── test_led.py
+├── test_servo.py
+└── test_lcd.py
+```
+
+# 🧪 Pruebas de Hardware
+
+Para garantizar el correcto funcionamiento de cada componente físico del sistema, se desarrollaron pruebas individuales para cada dispositivo conectado a la Raspberry Pi.
+
+Las pruebas se encuentran en la carpeta:
+
+```text
+tests/
+├── test_buzzer.py
+├── test_led.py
+├── test_servo.py
+└── test_lcd.py
+```
+
+---
+
+## 🔊 Prueba de Buzzer
+
+Verifica la activación del buzzer mediante distintos patrones de alerta sonora.
+
+### Funcionalidades evaluadas
+
+- Sonido continuo.
+- Pitidos cortos de alerta.
+- Pitido prolongado.
+- Liberación correcta de recursos GPIO.
+
+### Fragmento principal
+
+```python
+buzzer_on()
+time.sleep(2)
+buzzer_off()
+
+for i in range(3):
+    buzzer_on()
+    time.sleep(0.3)
+    buzzer_off()
+    time.sleep(0.3)
+```
+
+### Archivo
+
+```text
+tests/test_buzzer.py
+```
+
+---
+
+## 💡 Prueba de LED RGB
+
+Verifica los estados visuales del sistema para indicar acceso permitido o denegado.
+
+### Funcionalidades evaluadas
+
+- Encendido LED verde.
+- Encendido LED rojo.
+- Apagado del LED.
+- Secuencia de parpadeo de alarma.
+
+### Fragmento principal
+
+```python
+led_verde()
+time.sleep(3)
+
+led_rojo()
+time.sleep(3)
+
+led_apagado()
+```
+
+### Archivo
+
+```text
+tests/test_led.py
+```
+
+---
+
+## 🚧 Prueba de Servomotor
+
+Permite validar el mecanismo de apertura y cierre de la barrera de acceso.
+
+### Funcionalidades evaluadas
+
+- Apertura de barrera.
+- Cierre de barrera.
+- Ciclos repetitivos de funcionamiento.
+
+### Fragmento principal
+
+```python
+barrera_abrir()
+time.sleep(2)
+
+barrera_cerrar()
+time.sleep(2)
+```
+
+### Archivo
+
+```text
+tests/test_servo.py
+```
+
+---
+
+## 📟 Prueba de Pantalla LCD
+
+Verifica la visualización de mensajes de estado y alertas para el usuario.
+
+### Funcionalidades evaluadas
+
+- Mensaje de acceso autorizado.
+- Alerta por falta de casco.
+- Alerta por falta de chaleco.
+- Alerta por ausencia de múltiples EPP.
+- Apagado de pantalla.
+
+### Fragmento principal
+
+```python
+lcd_ok(lcd, 5)
+
+lcd_alerta(
+    lcd,
+    falta_casco=True,
+    falta_chaleco=False
+)
+```
+
+### Archivo
+
+```text
+tests/test_lcd.py
+```
+
+---
+
+## ▶️ Ejecución de Pruebas
+
+Las pruebas pueden ejecutarse individualmente desde la Raspberry Pi.
+
+### Buzzer
+
+```bash
+python tests/test_buzzer.py
+```
+
+### LED RGB
+
+```bash
+python tests/test_led.py
+```
+
+### Servomotor
+
+```bash
+python tests/test_servo.py
+```
+
+### LCD
+
+```bash
+python tests/test_lcd.py
+```
+
+---
+
+## ✅ Resultados Esperados
+
+Al ejecutar correctamente las pruebas:
+
+- El buzzer debe emitir los patrones de sonido programados.
+- El LED RGB debe alternar entre los estados verde, rojo y apagado.
+- El servomotor debe abrir y cerrar la barrera sin bloqueos.
+- La pantalla LCD debe mostrar correctamente los mensajes de acceso y alerta.
+
+Estas pruebas permiten validar cada componente de forma independiente antes de ejecutar el sistema completo de detección de EPP.
 
 ---
 
@@ -309,7 +518,7 @@ pip install -r requirements.txt
 
 ## 🤖 Modelo Entrenado
 
-El sistema utiliza un modelo YOLOv8 previamente entrenado para la detección de Equipos de Protección Personal (EPP).
+El sistema utiliza un modelo YOLOv26 previamente entrenado para la detección de Equipos de Protección Personal (EPP).
 
 Debido a su tamaño, el modelo no se encuentra incluido dentro de este repositorio. Antes de ejecutar el sistema, debe configurarse la ruta del modelo en el archivo `config.py`.
 
