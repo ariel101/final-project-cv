@@ -38,7 +38,7 @@ Desarrollar un sistema inteligente capaz de verificar automáticamente el uso ad
 > Agregar imagen aquí
 
 ```markdown
-![Sistema Completo](images/sistema_general.jpg)
+![Sistema Completo](images/sistema_general.png)
 ```
 
 ---
@@ -48,7 +48,8 @@ Desarrollar un sistema inteligente capaz de verificar automáticamente el uso ad
 > Agregar imagen aquí
 
 ```markdown
-![Detección](images/deteccion.jpg)
+![Detección](images/tiempo_real.jpeg)
+![Detección](images/tiempo_real2.jpeg)
 ```
 
 ---
@@ -58,7 +59,8 @@ Desarrollar un sistema inteligente capaz de verificar automáticamente el uso ad
 > Agregar imagen aquí
 
 ```markdown
-![Acceso Permitido](images/acceso_ok.jpg)
+![Acceso Permitido](images/acceso_ok1.jpeg)
+![acceso Permitido](images/acceso_ok_pantalla.jpeg)
 ```
 
 ---
@@ -68,7 +70,8 @@ Desarrollar un sistema inteligente capaz de verificar automáticamente el uso ad
 > Agregar imagen aquí
 
 ```markdown
-![Acceso Denegado](images/acceso_denegado.jpg)
+![Acceso Denegado](images/falta_chaleco.jpeg)
+![Acceso Denegado](images/falta_chaleco2.jpeg)
 ```
 
 ---
