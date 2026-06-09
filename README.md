@@ -9,7 +9,7 @@
 
 Sistema embebido de visión artificial para el control automatizado de acceso mediante la verificación en tiempo real del uso correcto de Equipos de Protección Personal (EPP).
 
-El proyecto utiliza una Raspberry Pi 4 Model B, una cámara de captura de video y un modelo de detección de objetos YOLOv8 entrenado para identificar elementos de seguridad como cascos y chalecos reflectantes.
+El proyecto utiliza una Raspberry Pi 4 Model B, una cámara de captura de video y un modelo de detección de objetos YOLOv26 entrenado para identificar elementos de seguridad como cascos y chalecos reflectantes.
 
 Cuando un trabajador se presenta frente a la cámara, el sistema analiza la imagen y determina si cumple con los requisitos de seguridad establecidos. Si porta todos los elementos obligatorios, se autoriza el acceso; en caso contrario, se genera una alerta visual y sonora indicando los elementos faltantes.
 
@@ -108,7 +108,7 @@ Desarrollar un sistema inteligente capaz de verificar automáticamente el uso ad
                             ▼
                  ┌─────────────────────┐
                  │ Raspberry Pi 4      │
-                 │ YOLOv8 + OpenCV     │
+                 │ YOLOv26 + OpenCV     │
                  └──────┬──────────────┘
                         │
         ┌───────────────┼────────────────┐
