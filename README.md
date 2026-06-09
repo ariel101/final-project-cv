@@ -35,43 +35,43 @@ Desarrollar un sistema inteligente capaz de verificar automáticamente el uso ad
 
 ## Sistema Completo
 
-> Agregar imagen aquí
+![Sistema Completo](images/sistema_general.png)
 
 ```markdown
-![Sistema Completo](images/sistema_general.png)
+
 ```
 
 ---
 
 ## Detección de EPP en Tiempo Real
 
-> Agregar imagen aquí
-
-```markdown
 ![Detección](images/tiempo_real.jpeg)
 ![Detección](images/tiempo_real2.jpeg)
+
+```markdown
+
 ```
 
 ---
 
 ## Acceso Permitido
 
-> Agregar imagen aquí
-
-```markdown
 ![Acceso Permitido](images/acceso_ok1.jpeg)
 ![acceso Permitido](images/acceso_ok_pantalla.jpeg)
+
+```markdown
+
 ```
 
 ---
 
 ## Acceso Denegado
 
-> Agregar imagen aquí
-
-```markdown
 ![Acceso Denegado](images/falta_chaleco.jpeg)
 ![Acceso Denegado](images/falta_chaleco2.jpeg)
+
+```markdown
+
 ```
 
 ---
