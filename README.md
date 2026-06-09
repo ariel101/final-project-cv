@@ -1,7 +1,7 @@
 # 🦺 Sistema Inteligente de Control de Acceso mediante Detección de EPP con YOLOv26 y Raspberry Pi
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
-![YOLO26](https://shields.io)
+![YOLOv26](https://img.shields.io/badge/YOLOv8-Ultralytics-green)
 ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-4-red)
 ![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-orange)
 
