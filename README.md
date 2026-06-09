@@ -28,16 +28,19 @@ El proyecto utiliza una Raspberry Pi 4 Model B junto con una cámara de video y 
 
 ## Capturas del Proyecto
 
+---
 ### Sistema Completo
 
 ![Sistema Completo](images/sistema_completo.jpeg)
 ![Sistema General](images/sistema_general.png)
-
+---
+---
 ### Detección de EPP en Tiempo Real
 
 ![Ejecución YOLO](images/corriendo_yolo.jpeg)
 ![Detección 1](images/tiempo_real.jpeg)
 ![Detección 2](images/tiempo_real2.jpeg)
+---
 
 ### Acceso Permitido / Acceso Denegado
 
@@ -193,6 +196,22 @@ Cada componente físico dispone de un script de prueba independiente ubicado en 
 | Servomotor | `test_servo.py` | `python tests/test_servo.py` |
 | LCD 16×2 | `test_lcd.py` | `python tests/test_lcd.py` |
 
+### Buzzer
+
+![Prueba Buzzer](images/test_buzzer.jpeg)
+
+### LED RGB
+
+![Prueba LED](images/test_rgb.jpeg)
+
+### Servomotor
+
+![Prueba Servomotor](images/test_servo.jpeg)
+
+### LCD 16×2
+
+![Prueba LCD](images/test_lcd.jpeg)
+
 **Resultados esperados:**
 - El buzzer emite los patrones de sonido programados (continuo, pitidos cortos y prolongado).
 - El LED RGB alterna entre verde, rojo y apagado.
@@ -271,8 +290,8 @@ Modifique los pines en `config.py` según la conexión física utilizada:
 ```python
 LED_VERDE = 27
 LED_ROJO  = 17
-BUZZER    = 22
-SERVO     = 18
+BUZZER    = 18
+SERVO     = 12
 ```
 
 ---
