@@ -479,6 +479,10 @@ Muestra al usuario los elementos de seguridad faltantes.
 
 **Cayo Vargas Ariel Nelzon**
 
+**Cepeda Alvaro Sebastian**
+
+**Laime Marco**
+
 **UMRPSFXCH / Ing Ciencias de la Computacion**
 
 **Gestión 01-2026**
