@@ -1,7 +1,7 @@
 # Sistema Inteligente de Control de Acceso mediante Detección de EPP
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
-![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-green)
+![YOLOv8](https://img.shields.io/badge/YOLOv26-Ultralytics-green)
 ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-4-red)
 ![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-orange)
 
@@ -9,7 +9,7 @@
 
 Sistema embebido de visión artificial para el control automatizado de acceso mediante la verificación en tiempo real del uso correcto de Equipos de Protección Personal (EPP).
 
-El proyecto utiliza una Raspberry Pi 4 Model B junto con una cámara de video y un modelo YOLOv8 entrenado para identificar cascos y chalecos reflectantes. Cuando un trabajador se posiciona frente a la cámara, el sistema analiza la imagen y determina si cumple con los requisitos de seguridad establecidos: si porta todos los elementos obligatorios, se autoriza el acceso; de lo contrario, se genera una alerta visual y sonora indicando los elementos faltantes.
+El proyecto utiliza una Raspberry Pi 4 Model B junto con una cámara de video y un modelo YOLOv26 entrenado para identificar cascos y chalecos reflectantes. Cuando un trabajador se posiciona frente a la cámara, el sistema analiza la imagen y determina si cumple con los requisitos de seguridad establecidos: si porta todos los elementos obligatorios, se autoriza el acceso; de lo contrario, se genera una alerta visual y sonora indicando los elementos faltantes.
 
 ---
 
@@ -18,7 +18,7 @@ El proyecto utiliza una Raspberry Pi 4 Model B junto con una cámara de video y 
 **General:** Desarrollar un sistema inteligente capaz de verificar automáticamente el uso adecuado de Equipos de Protección Personal mediante técnicas de visión artificial e inteligencia artificial.
 
 **Específicos:**
-- Detectar EPP en tiempo real utilizando YOLOv8.
+- Detectar EPP en tiempo real utilizando YOLOv26.
 - Automatizar el control de acceso a zonas restringidas.
 - Reducir errores asociados a la supervisión manual.
 - Proporcionar retroalimentación inmediata al usuario.
@@ -78,7 +78,7 @@ El proyecto utiliza una Raspberry Pi 4 Model B junto con una cámara de video y 
                             ▼
                  ┌─────────────────────┐
                  │    Raspberry Pi 4   │
-                 │   YOLOv8 + OpenCV   │
+                 │   YOLOv26 + OpenCV   │
                  └──────┬──────────────┘
                         │
         ┌───────────────┼────────────────┐
@@ -111,7 +111,7 @@ frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
 
 #### Detección de EPP (`main.py`, `config.py`)
 
-Carga el modelo YOLOv8 entrenado y ejecuta inferencias sobre cada fotograma. Las clases detectadas se agrupan para contemplar distintas etiquetas generadas durante el entrenamiento.
+Carga el modelo YOLOv26 entrenado y ejecuta inferencias sobre cada fotograma. Las clases detectadas se agrupan para contemplar distintas etiquetas generadas durante el entrenamiento.
 
 ```python
 model = YOLO(config.MODELO_DIR, task="detect")
@@ -224,7 +224,7 @@ Cada componente físico dispone de un script de prueba independiente ubicado en 
 
 | Biblioteca | Función |
 |---|---|
-| Ultralytics | Implementación de YOLOv8 |
+| Ultralytics | Implementación de YOLOv26 |
 | OpenCV | Procesamiento de imágenes |
 | NumPy | Operaciones matemáticas |
 | RPi.GPIO | Control de pines GPIO |
@@ -262,7 +262,7 @@ venv\Scripts\activate
 
 ### Modelo entrenado
 
-El modelo YOLOv8 no está incluido en el repositorio por su tamaño. Antes de ejecutar el sistema, configure su ruta en `config.py`:
+El modelo YOLOv26 no está incluido en el repositorio por su tamaño. Antes de ejecutar el sistema, configure su ruta en `config.py`:
 
 ```python
 MODEL_DIR = "/home/raspberrypiii/best26_ariel_ncnn_model/"
@@ -296,7 +296,7 @@ SERVO     = 12
 python main.py
 ```
 
-Al iniciar, el sistema cargará la cámara, el modelo YOLOv8 y comenzará la detección en tiempo real con control de acceso activo.
+Al iniciar, el sistema cargará la cámara, el modelo YOLOv26 y comenzará la detección en tiempo real con control de acceso activo.
 
 ---
 
